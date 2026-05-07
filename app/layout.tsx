@@ -3,6 +3,7 @@ import "./globals.css";
 import { Nav } from "@/components/Nav";
 import { Footer } from "@/components/Footer";
 import { supabaseServer } from "@/lib/supabase/server";
+import { getT } from "@/lib/i18n";
 
 export const metadata: Metadata = {
   title: { default: "pineslog · road to $1M", template: "%s · pineslog" },
@@ -22,13 +23,14 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const supabase = await supabaseServer();
   const { data: { user } } = await supabase.auth.getUser();
   const isAdmin = !!user;
+  const { locale, t } = await getT();
 
   return (
-    <html lang="en">
+    <html lang={locale}>
       <body className="min-h-screen flex flex-col">
-        <Nav isAdmin={isAdmin} />
+        <Nav isAdmin={isAdmin} locale={locale} t={t} />
         <main className="relative z-10 flex-1">{children}</main>
-        <Footer />
+        <Footer t={t} />
       </body>
     </html>
   );

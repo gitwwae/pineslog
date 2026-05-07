@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { getSettings, getLatestSnapshot, daysSince, formatUSD } from "@/lib/data";
+import { getT } from "@/lib/i18n";
 
 export default async function HomePage() {
-  const settings = await getSettings();
-  const snap = await getLatestSnapshot();
+  const [settings, snap, { t }] = await Promise.all([getSettings(), getLatestSnapshot(), getT()]);
 
   const day = daysSince(settings.start_date);
   const cumul = snap?.revenue_cumulative ?? 0;
@@ -14,40 +14,35 @@ export default async function HomePage() {
     <>
       {/* HERO */}
       <section className="container-prose pt-16 sm:pt-24 pb-12 sm:pb-20">
-        <div className="section-eyebrow mb-4">A captain&rsquo;s log · est. 2026</div>
+        <div className="section-eyebrow mb-4">{t.home.eyebrow}</div>
         <h1 className="h-serif text-5xl sm:text-7xl font-medium tracking-tightest leading-[0.95] max-w-4xl">
-          Field notes on the road to <span className="text-amber-700">$1M</span>.<br />
-          Building <span className="italic">AI</span> in the open.
+          {t.home.title1}<span className="text-amber-700">{t.home.titleAccent}</span>{t.home.title2}<span className="italic">{t.home.titleEm}</span>{t.home.title3}
         </h1>
-        <p className="muted mt-6 max-w-2xl text-lg">
-          A public log of every step from $0 to a million dollars.
-          Tools, numbers, mistakes, lessons. Written down, in the open,
-          by a solo founder with a tech background and a tight budget.
-        </p>
+        <p className="muted mt-6 max-w-2xl text-lg">{t.home.sub}</p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/journey" className="btn btn-primary">See the journey →</Link>
-          <Link href="/stack" className="btn btn-ghost">My stack</Link>
+          <Link href="/journey" className="btn btn-primary">{t.home.cta1}</Link>
+          <Link href="/stack" className="btn btn-ghost">{t.home.cta2}</Link>
         </div>
       </section>
 
       {/* LIVE NUMBERS */}
       <section className="container-prose pb-12">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <Stat label="Day" value={`${day}`} sub={`of ${settings.horizon_months * 30}`} />
-          <Stat label="Cumulative" value={formatUSD(cumul)} sub={`${pct.toFixed(2)}% of $1M`} />
-          <Stat label="MRR" value={formatUSD(mrr)} sub="growing" />
-          <Stat label="Burn" value={formatUSD(snap?.burn_monthly ?? 0)} sub={`${snap?.services_count ?? 0} active tools`} />
+          <Stat label={t.home.day} value={`${day}`} sub={t.home.ofN(settings.horizon_months * 30)} />
+          <Stat label={t.home.cumulative} value={formatUSD(cumul)} sub={t.home.pctOf(pct.toFixed(2))} />
+          <Stat label={t.home.mrr} value={formatUSD(mrr)} sub={t.home.growing} />
+          <Stat label={t.home.burn} value={formatUSD(snap?.burn_monthly ?? 0)} sub={t.home.activeTools(snap?.services_count ?? 0)} />
         </div>
       </section>
 
       {/* PILLARS */}
       <section className="container-prose pb-20">
-        <div className="section-eyebrow mb-3">The strategy</div>
-        <h2 className="h-serif text-3xl sm:text-4xl mb-10 max-w-2xl">Cash → Audience → Product. In that order.</h2>
+        <div className="section-eyebrow mb-3">{t.home.strategyEyebrow}</div>
+        <h2 className="h-serif text-3xl sm:text-4xl mb-10 max-w-2xl">{t.home.strategyTitle}</h2>
         <div className="grid sm:grid-cols-3 gap-4">
-          <Pillar title="Services first" body="AI consulting and automation for SMBs funds everything. Cash flow on day one, market insight built in." />
-          <Pillar title="Audience always" body="Build in public. Every project, every number, every mistake. Public. Compounding asset, zero ad budget." />
-          <Pillar title="Product later" body="Productize the most recurring problem from services into a micro-SaaS. Then scale, diversify, repeat." />
+          <Pillar title={t.home.pillars.services.title} body={t.home.pillars.services.body} />
+          <Pillar title={t.home.pillars.audience.title} body={t.home.pillars.audience.body} />
+          <Pillar title={t.home.pillars.product.title} body={t.home.pillars.product.body} />
         </div>
       </section>
     </>

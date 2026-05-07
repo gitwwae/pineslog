@@ -5,15 +5,20 @@ export interface Phase {
   id: string;
   slug: string;
   name: string;
+  name_it: string | null;
   short_name: string;
   start_month: number;
   end_month: number;
   color: string;
   description: string | null;
+  description_it: string | null;
   deliverables: string[];
+  deliverables_it: string[] | null;
   target_amount: number | null;
   position: number;
 }
+
+export type LocalizedPhase = Omit<Phase, "name_it" | "description_it" | "deliverables_it">;
 
 export interface Milestone {
   id: string;
@@ -60,6 +65,7 @@ export interface Snapshot {
 export interface LogEntry {
   id: string;
   slug: string;
+  locale: "en" | "it";
   title: string;
   body_md: string;
   excerpt: string | null;

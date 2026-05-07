@@ -1,10 +1,11 @@
 import { getPublicServices, formatUSD } from "@/lib/data";
 import { STATUS_LABEL, monthlyCost, annualCost } from "@/lib/types";
+import { getT } from "@/lib/i18n";
 
 export const metadata = { title: "Stack" };
 
 export default async function StackPage() {
-  const services = await getPublicServices();
+  const [services, { t }] = await Promise.all([getPublicServices(), getT()]);
   const active = services.filter(s => s.status === "active" || s.status === "trial");
   const totalMonthly = active.reduce((acc, s) => acc + monthlyCost(s), 0);
   const totalAnnual  = active.reduce((acc, s) => acc + annualCost(s), 0);
@@ -12,36 +13,35 @@ export default async function StackPage() {
   return (
     <div className="container-prose py-12 sm:py-16 space-y-10">
       <header>
-        <div className="section-eyebrow mb-3">Build in public · live</div>
-        <h1 className="h-serif text-4xl sm:text-5xl tracking-tightest leading-tight">The stack.</h1>
+        <div className="section-eyebrow mb-3">{t.stack.eyebrow}</div>
+        <h1 className="h-serif text-4xl sm:text-5xl tracking-tightest leading-tight">{t.stack.title}</h1>
         <p className="muted mt-4 max-w-2xl">
-          Every paid tool I use, the cost, and what it&rsquo;s for. Updated as I add or cut.
-          Burn rate goal in year one: under <span className="num text-amber-700 font-semibold">$200/mo</span>.
+          {t.stack.sub1}<span className="num text-amber-700 font-semibold">{t.stack.sub2}</span>{t.stack.sub3}
         </p>
       </header>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-        <Stat label="Active tools" value={`${active.length}`} />
-        <Stat label="Monthly burn" value={formatUSD(totalMonthly, { maximumFractionDigits: 2 })} />
-        <Stat label="Annual" value={formatUSD(totalAnnual)} />
+        <Stat label={t.stack.activeTools} value={`${active.length}`} />
+        <Stat label={t.stack.monthlyBurn} value={formatUSD(totalMonthly, { maximumFractionDigits: 2 })} />
+        <Stat label={t.stack.annual} value={formatUSD(totalAnnual)} />
       </div>
 
       <section className="card overflow-hidden">
         <div className="grid grid-cols-[1.2fr_0.7fr_0.7fr_0.7fr_0.6fr] gap-2 px-5 py-3 border-b border-forest/10 text-[11px] uppercase tracking-widest dim bg-cream-50">
-          <div>Service</div>
-          <div>Category</div>
-          <div className="text-right">Cost</div>
-          <div className="text-right">/ month</div>
-          <div className="text-right">Status</div>
+          <div>{t.stack.thService}</div>
+          <div>{t.stack.thCategory}</div>
+          <div className="text-right">{t.stack.thCost}</div>
+          <div className="text-right">{t.stack.thMonth}</div>
+          <div className="text-right">{t.stack.thStatus}</div>
         </div>
         {services.length === 0 && (
-          <div className="px-5 py-8 muted text-sm">Nessun tool pubblicato ancora.</div>
+          <div className="px-5 py-8 muted text-sm">{t.stack.empty}</div>
         )}
         {services.map((s) => (
           <div key={s.id} className="grid grid-cols-[1.2fr_0.7fr_0.7fr_0.7fr_0.6fr] gap-2 px-5 py-4 border-b border-forest/10 last:border-0 items-center text-sm">
             <div>
               <div className="text-ink font-medium">{s.name}</div>
-              {s.provider && <div className="dim text-xs mt-0.5">{s.provider}{s.essential && " · essential"}</div>}
+              {s.provider && <div className="dim text-xs mt-0.5">{s.provider}{s.essential && ` · ${t.stack.essential}`}</div>}
             </div>
             <div className="muted text-xs">{s.category}</div>
             <div className="text-right num">{formatUSD(s.cost, { maximumFractionDigits: 2 })}<span className="dim text-xs ml-1">/{shortCycle(s.cycle)}</span></div>

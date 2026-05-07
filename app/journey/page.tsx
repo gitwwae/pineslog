@@ -1,25 +1,24 @@
-import { getPhases, getMilestones, getSettings, formatUSD } from "@/lib/data";
+import { getMilestones, getPhases, getSettings, formatUSD } from "@/lib/data";
 import { Gantt } from "@/components/Gantt";
 import { RevenueCurve } from "@/components/RevenueCurve";
+import { getT } from "@/lib/i18n";
 
 export const metadata = { title: "Journey" };
 
 export default async function JourneyPage() {
-  const [phases, milestones, settings] = await Promise.all([getPhases(), getMilestones(), getSettings()]);
+  const { locale, t } = await getT();
+  const [phases, milestones, settings] = await Promise.all([getPhases(locale), getMilestones(), getSettings()]);
   const sorted = [...phases].sort((a, b) => a.position - b.position);
 
   return (
     <div className="container-prose py-12 sm:py-16 space-y-12">
       <header>
-        <div className="section-eyebrow mb-3">Roadmap · 48 months</div>
-        <h1 className="h-serif text-4xl sm:text-5xl tracking-tightest leading-tight">The 6 macro-phases.</h1>
-        <p className="muted mt-4 max-w-2xl">
-          Six phases, four years, one goal. The non-linear path from zero to a million.
-          Slow at the start (validation + audience), compounding hard in the back half.
-        </p>
+        <div className="section-eyebrow mb-3">{t.journey.eyebrow}</div>
+        <h1 className="h-serif text-4xl sm:text-5xl tracking-tightest leading-tight">{t.journey.title}</h1>
+        <p className="muted mt-4 max-w-2xl">{t.journey.sub}</p>
       </header>
 
-      <Gantt phases={phases} milestones={milestones} />
+      <Gantt phases={phases} milestones={milestones} t={t} />
       <RevenueCurve milestones={milestones} goal={settings.goal_amount} horizonMonths={settings.horizon_months} />
 
       <section className="grid sm:grid-cols-2 gap-4">
@@ -31,7 +30,7 @@ export default async function JourneyPage() {
               </span>
               <h3 className="h-serif text-xl">{p.name}</h3>
             </div>
-            <div className="muted text-xs num mb-3">M{p.start_month}–{p.end_month}</div>
+            <div className="muted text-xs num mb-3">{t.journey.monthsRange(p.start_month, p.end_month)}</div>
             {p.description && <p className="text-sm text-ink-dim mb-3">{p.description}</p>}
             {p.deliverables?.length > 0 && (
               <ul className="space-y-1.5 mb-3">
@@ -45,7 +44,7 @@ export default async function JourneyPage() {
             )}
             {p.target_amount != null && p.target_amount > 0 && (
               <div className="inline-flex items-center gap-1.5 mt-2 text-[12px] text-forest num bg-forest-100 border border-forest-200 px-3 py-1 rounded-full">
-                Target M{p.end_month}: {formatUSD(p.target_amount)}
+                {t.journey.target(`M${p.end_month}`, formatUSD(p.target_amount))}
               </div>
             )}
           </article>

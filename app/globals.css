@@ -122,3 +122,95 @@ a:hover { color: #004225; }
 
 /* Subtle divider */
 .hr-soft { height: 1px; background: linear-gradient(90deg, transparent, rgba(0, 66, 37, 0.15), transparent); }
+
+/* Prose for markdown log entries */
+.prose-pineslog {
+  color: #1F2017;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+.prose-pineslog > * + * { margin-top: 1.1em; }
+.prose-pineslog h1, .prose-pineslog h2, .prose-pineslog h3, .prose-pineslog h4 {
+  font-family: 'Newsreader', ui-serif, Georgia, serif;
+  color: #004225;
+  letter-spacing: -0.02em;
+  margin-top: 2em;
+  margin-bottom: 0.5em;
+  line-height: 1.25;
+}
+.prose-pineslog h1 { font-size: 2rem; }
+.prose-pineslog h2 { font-size: 1.6rem; }
+.prose-pineslog h3 { font-size: 1.3rem; }
+.prose-pineslog h4 { font-size: 1.1rem; }
+.prose-pineslog p { color: #1F2017; }
+.prose-pineslog a {
+  color: #004225;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 66, 37, 0.35);
+  text-underline-offset: 3px;
+}
+.prose-pineslog a:hover { color: #B8763D; text-decoration-color: rgba(184, 118, 61, 0.6); }
+.prose-pineslog strong { color: #004225; font-weight: 600; }
+.prose-pineslog em { color: #5D5547; }
+.prose-pineslog ul, .prose-pineslog ol { padding-left: 1.4em; }
+.prose-pineslog ul { list-style: none; }
+.prose-pineslog ul > li { position: relative; padding-left: 1em; }
+.prose-pineslog ul > li::before {
+  content: '›';
+  position: absolute;
+  left: 0;
+  color: #004225;
+  font-weight: 600;
+}
+.prose-pineslog ol { list-style: decimal; }
+.prose-pineslog ol > li::marker { color: #004225; font-variant-numeric: tabular-nums; font-weight: 600; }
+.prose-pineslog li + li { margin-top: 0.4em; }
+.prose-pineslog blockquote {
+  border-left: 3px solid #004225;
+  padding-left: 1.2em;
+  margin-left: 0;
+  color: #5D5547;
+  font-style: italic;
+}
+.prose-pineslog code {
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.92em;
+  background: #FAF3E2;
+  border: 1px solid rgba(0, 66, 37, 0.10);
+  padding: 0.1em 0.4em;
+  border-radius: 4px;
+  color: #004225;
+}
+.prose-pineslog pre {
+  background: #1F2017;
+  color: #FFFAF0;
+  padding: 1em 1.25em;
+  border-radius: 12px;
+  overflow-x: auto;
+  border: 1px solid rgba(0, 66, 37, 0.10);
+  font-size: 0.92em;
+  line-height: 1.55;
+}
+.prose-pineslog pre code {
+  background: transparent;
+  border: 0;
+  color: inherit;
+  padding: 0;
+}
+.prose-pineslog hr {
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 66, 37, 0.20), transparent);
+  margin: 2.5em 0;
+}
+.prose-pineslog table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95em;
+}
+.prose-pineslog th, .prose-pineslog td {
+  border-bottom: 1px solid rgba(0, 66, 37, 0.10);
+  padding: 0.6em 0.8em;
+  text-align: left;
+}
+.prose-pineslog th { color: #004225; font-weight: 600; background: #FAF3E2; }

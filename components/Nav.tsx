@@ -1,19 +1,22 @@
 import Link from "next/link";
+import { LocaleSwitcher } from "./LocaleSwitcher";
+import type { Locale, Dictionary } from "@/lib/i18n/messages";
 
-export function Nav({ isAdmin = false }: { isAdmin?: boolean }) {
+export function Nav({ isAdmin = false, locale, t }: { isAdmin?: boolean; locale: Locale; t: Dictionary }) {
   return (
     <header className="relative z-10 border-b border-forest/10 bg-cream/70 backdrop-blur supports-[backdrop-filter]:bg-cream/60">
-      <div className="container-prose flex items-center justify-between py-5">
-        <Link href="/" className="flex items-center gap-2.5 group">
+      <div className="container-prose flex items-center justify-between py-5 gap-3">
+        <Link href="/" className="flex items-center gap-2.5 group shrink-0">
           <Logo />
           <span className="h-serif text-xl tracking-tight">pineslog</span>
         </Link>
         <nav className="flex items-center gap-1 sm:gap-2">
-          <NavLink href="/journey">Journey</NavLink>
-          <NavLink href="/stack">Stack</NavLink>
-          <NavLink href="/log">Log</NavLink>
-          <NavLink href="/about">About</NavLink>
-          {isAdmin && <NavLink href="/admin" highlight>Admin</NavLink>}
+          <NavLink href="/journey">{t.nav.journey}</NavLink>
+          <NavLink href="/stack">{t.nav.stack}</NavLink>
+          <NavLink href="/log">{t.nav.log}</NavLink>
+          <NavLink href="/about">{t.nav.about}</NavLink>
+          {isAdmin && <NavLink href="/admin" highlight>{t.nav.admin}</NavLink>}
+          <span className="ml-1 sm:ml-3"><LocaleSwitcher current={locale} /></span>
         </nav>
       </div>
     </header>

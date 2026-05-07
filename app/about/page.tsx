@@ -1,29 +1,26 @@
 import { getSettings } from "@/lib/data";
+import { getT } from "@/lib/i18n";
 
 export const metadata = { title: "About" };
 
 export default async function AboutPage() {
-  const s = await getSettings();
+  const [s, { t }] = await Promise.all([getSettings(), getT()]);
   return (
     <div className="container-prose py-12 sm:py-16 max-w-3xl">
-      <div className="section-eyebrow mb-3">About</div>
-      <h1 className="h-serif text-4xl sm:text-5xl tracking-tightest leading-tight">Hi, I&rsquo;m {s.founder_name}.</h1>
+      <div className="section-eyebrow mb-3">{t.about.eyebrow}</div>
+      <h1 className="h-serif text-4xl sm:text-5xl tracking-tightest leading-tight">{t.about.titlePrefix}{s.founder_name}.</h1>
       <div className="muted mt-6 space-y-4 text-lg leading-relaxed">
         <p>
-          I&rsquo;m a tech / AI builder. <span className="text-forest font-medium">pineslog</span> is my public log on the way to <span className="text-amber-700 font-semibold num">$1M</span>.
-          Starting from a tight budget, no audience, no funding.
+          {t.about.p1A}<span className="text-forest font-medium">pineslog</span>{t.about.p1B}<span className="text-amber-700 font-semibold num">$1M</span>{t.about.p1C}
         </p>
+        <p>{t.about.p2}</p>
         <p>
-          I write down the tools, the numbers, what worked and what didn&rsquo;t. The plan is simple:
-          sell expertise, build an audience, productize, scale, diversify.
-        </p>
-        <p>
-          If you build in AI or want to follow the journey, the <a href="/log" className="underline decoration-forest/40 hover:text-forest">log</a> is the place.
+          {t.about.p3A}<a href="/log" className="underline decoration-forest/40 hover:text-forest">{t.about.p3B}</a>{t.about.p3C}
         </p>
       </div>
       <div className="hr-soft my-10" />
       <div className="text-sm muted">
-        Reach out: <a href="mailto:hi@pineslog.com" className="text-amber-700 font-medium">hi@pineslog.com</a>
+        {t.about.reachOut} <a href="mailto:hi@pineslog.com" className="text-amber-700 font-medium">hi@pineslog.com</a>
       </div>
     </div>
   );
