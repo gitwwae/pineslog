@@ -24,7 +24,7 @@ export default async function JourneyPage() {
 
       <section className="grid sm:grid-cols-2 gap-4">
         {sorted.map((p) => (
-          <article key={p.id} className="card card-hover p-6">
+          <article key={p.id} id={`phase-${p.slug}`} className="card card-hover p-6 scroll-mt-24 transition-shadow">
             <div className="flex items-center gap-3 mb-2">
               <span className="text-[11px] font-bold rounded-full px-2.5 py-1 num" style={{ background: p.color, color: pickContrast(p.color) }}>
                 {p.short_name}
