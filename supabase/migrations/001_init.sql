@@ -1,4 +1,4 @@
--- pineslog — schema iniziale
+-- pineslog · schema iniziale
 -- Esegui questo file nel SQL Editor di Supabase (project > SQL > New query)
 
 create extension if not exists "uuid-ossp";
@@ -131,7 +131,7 @@ alter table services     enable row level security;
 alter table log_entries  enable row level security;
 alter table snapshots    enable row level security;
 
--- Public read policies (chiunque puo' leggere — il sito e' pubblico)
+-- Public read policies (chiunque puo' leggere, il sito e' pubblico)
 create policy "public read settings"   on settings    for select using (true);
 create policy "public read phases"     on phases      for select using (true);
 create policy "public read milestones" on milestones  for select using (true);

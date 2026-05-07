@@ -1,10 +1,10 @@
 # pineslog
 
-Field notes on the road to $1M — public log built with Next.js + Supabase.
+Field notes on the road to $1M. Public log built with Next.js + Supabase.
 
 ## Stack
 - Next.js 15 (App Router) + TypeScript + Tailwind
-- Supabase (Postgres + Auth — magic link)
+- Supabase (Postgres + Auth, magic link)
 - Vercel (deploy + dominio)
 - **$0/mo** su tutti i free tier
 
@@ -41,7 +41,7 @@ pineslog/
 
 ---
 
-## Setup — 30 minuti, una volta sola
+## Setup (30 minuti, una volta sola)
 
 ### 1. Crea il progetto Supabase
 

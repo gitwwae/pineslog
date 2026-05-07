@@ -14,8 +14,8 @@ export default async function JourneyPage() {
         <div className="section-eyebrow mb-3">Roadmap · 48 months</div>
         <h1 className="h-serif text-4xl sm:text-5xl tracking-tightest leading-tight">The 6 macro-phases.</h1>
         <p className="muted mt-4 max-w-2xl">
-          Six phases, four years, one goal. The non-linear path from zero to a million —
-          slow at the start (validation + audience), compounding hard in the back half.
+          Six phases, four years, one goal. The non-linear path from zero to a million.
+          Slow at the start (validation + audience), compounding hard in the back half.
         </p>
       </header>
 

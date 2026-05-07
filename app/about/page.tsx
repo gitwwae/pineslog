@@ -7,11 +7,11 @@ export default async function AboutPage() {
   return (
     <div className="container-prose py-12 sm:py-16 max-w-3xl">
       <div className="section-eyebrow mb-3">About</div>
-      <h1 className="h-serif text-4xl sm:text-5xl tracking-tightest leading-tight">Hi — I&rsquo;m {s.founder_name}.</h1>
+      <h1 className="h-serif text-4xl sm:text-5xl tracking-tightest leading-tight">Hi, I&rsquo;m {s.founder_name}.</h1>
       <div className="muted mt-6 space-y-4 text-lg leading-relaxed">
         <p>
-          I&rsquo;m a tech / AI builder. <span className="text-forest font-medium">pineslog</span> is my public log on the way to <span className="text-amber-700 font-semibold num">$1M</span> —
-          starting from a tight budget, no audience, no funding.
+          I&rsquo;m a tech / AI builder. <span className="text-forest font-medium">pineslog</span> is my public log on the way to <span className="text-amber-700 font-semibold num">$1M</span>.
+          Starting from a tight budget, no audience, no funding.
         </p>
         <p>
           I write down the tools, the numbers, what worked and what didn&rsquo;t. The plan is simple:

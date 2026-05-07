@@ -1,4 +1,4 @@
--- pineslog — seed iniziale
+-- pineslog · seed iniziale
 -- Esegui DOPO 001_init.sql, sempre nel SQL Editor di Supabase
 
 -- Settings: parametri globali
@@ -6,7 +6,7 @@ insert into settings (key, value) values
   ('goal_amount',       '1000000'::jsonb),
   ('start_date',        '"2026-05-01"'::jsonb),
   ('horizon_months',    '48'::jsonb),
-  ('site_tagline',      '"Field notes on the road to $1M — building AI in the open."'::jsonb),
+  ('site_tagline',      '"Field notes on the road to $1M. Building AI in the open."'::jsonb),
   ('founder_name',      '"Amin"'::jsonb)
 on conflict (key) do update set value = excluded.value, updated_at = now();
 

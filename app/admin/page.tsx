@@ -49,7 +49,7 @@ export default async function AdminDashboard() {
       <section className="card p-6">
         <div className="flex items-center justify-between mb-4">
           <h2 className="h-serif text-xl">Latest snapshot</h2>
-          <span className="text-xs num muted">{snap?.month ?? "—"}</span>
+          <span className="text-xs num muted">{snap?.month ?? "·"}</span>
         </div>
         {snap ? (
           <dl className="grid grid-cols-2 sm:grid-cols-4 gap-4 text-sm">

@@ -21,7 +21,7 @@ export default async function HomePage() {
         </h1>
         <p className="muted mt-6 max-w-2xl text-lg">
           A public log of every step from $0 to a million dollars.
-          Tools, numbers, mistakes, lessons — written down, in the open,
+          Tools, numbers, mistakes, lessons. Written down, in the open,
           by a solo founder with a tech background and a tight budget.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
@@ -46,7 +46,7 @@ export default async function HomePage() {
         <h2 className="h-serif text-3xl sm:text-4xl mb-10 max-w-2xl">Cash → Audience → Product. In that order.</h2>
         <div className="grid sm:grid-cols-3 gap-4">
           <Pillar title="Services first" body="AI consulting and automation for SMBs funds everything. Cash flow on day one, market insight built in." />
-          <Pillar title="Audience always" body="Build in public. Every project, number, mistake — public. Compounding asset, zero ad budget." />
+          <Pillar title="Audience always" body="Build in public. Every project, every number, every mistake. Public. Compounding asset, zero ad budget." />
           <Pillar title="Product later" body="Productize the most recurring problem from services into a micro-SaaS. Then scale, diversify, repeat." />
         </div>
       </section>
