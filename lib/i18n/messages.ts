@@ -19,9 +19,8 @@ export type Dictionary = {
   };
   journey: {
     eyebrow: string; title: string; sub: string;
-    monthsRange: (a: number, b: number) => string;
-    target: (label: string, amount: string) => string;
     revenueLabel: string; tooltipJump: string;
+    targetLabel: string;
   };
   stack: {
     eyebrow: string; title: string; sub1: string; sub2: string; sub3: string;
@@ -79,10 +78,9 @@ export const messages: { en: Dictionary; it: Dictionary } = {
       eyebrow: "Roadmap · 48 months",
       title: "The 6 macro-phases.",
       sub: "Six phases, four years, one goal. The non-linear path from zero to a million. Slow at the start (validation + audience), compounding hard in the back half.",
-      monthsRange: (a: number, b: number) => `M${a}-${b}`,
-      target: (label: string, amount: string) => `Target ${label}: ${amount}`,
       revenueLabel: "◆ Cumulative revenue",
-      tooltipJump: "click to jump"
+      tooltipJump: "click to jump",
+      targetLabel: "Target"
     },
     stack: {
       eyebrow: "Build in public · live",
@@ -171,10 +169,9 @@ export const messages: { en: Dictionary; it: Dictionary } = {
       eyebrow: "Roadmap · 48 mesi",
       title: "Le 6 macro-fasi.",
       sub: "Sei fasi, quattro anni, un obiettivo. Il percorso non lineare da zero al milione. Lento all'inizio (validazione + audience), che fa compounding pesante nella seconda meta.",
-      monthsRange: (a: number, b: number) => `M${a}-${b}`,
-      target: (label: string, amount: string) => `Target ${label}: ${amount}`,
       revenueLabel: "◆ Revenue cumulato",
-      tooltipJump: "click per saltare"
+      tooltipJump: "click per saltare",
+      targetLabel: "Target"
     },
     stack: {
       eyebrow: "Build in public · live",

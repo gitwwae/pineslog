@@ -2,11 +2,16 @@
 
 import { useState } from "react";
 import type { Milestone, LocalizedPhase } from "@/lib/types";
-import type { Dictionary } from "@/lib/i18n/messages";
 
 const TOTAL_MONTHS = 48;
 
-export function Gantt({ phases, milestones, t }: { phases: LocalizedPhase[]; milestones: Milestone[]; t: Dictionary }) {
+type Labels = {
+  revenue: string;
+  jump: string;
+  targetPrefix: string;
+};
+
+export function Gantt({ phases, milestones, labels }: { phases: LocalizedPhase[]; milestones: Milestone[]; labels: Labels }) {
   const sortedPhases = [...phases].sort((a, b) => a.position - b.position);
   const [hoverPhase, setHoverPhase] = useState<LocalizedPhase | null>(null);
   const [hoverMs, setHoverMs] = useState<Milestone | null>(null);
@@ -69,7 +74,7 @@ export function Gantt({ phases, milestones, t }: { phases: LocalizedPhase[]; mil
 
         <div className="grid grid-cols-[180px_1fr] items-center h-12">
           <div className="flex items-center gap-2 pr-2">
-            <span className="text-[12px] text-amber-700 font-semibold">{t.journey.revenueLabel}</span>
+            <span className="text-[12px] text-amber-700 font-semibold">{labels.revenue}</span>
           </div>
           <div className="relative h-12">
             <BgGrid />
@@ -102,15 +107,15 @@ export function Gantt({ phases, milestones, t }: { phases: LocalizedPhase[]; mil
             <div className="flex items-center gap-2 mb-1.5">
               <span className="text-[11px] font-bold rounded-full px-2 py-0.5 num" style={{ background: hoverPhase.color, color: contrastInk(hoverPhase.color) }}>{hoverPhase.short_name}</span>
               <h4 className="h-serif text-base">{hoverPhase.name}</h4>
-              <span className="ml-auto text-[11px] muted num">{t.journey.monthsRange(hoverPhase.start_month, hoverPhase.end_month)}</span>
+              <span className="ml-auto text-[11px] muted num">M{hoverPhase.start_month}-{hoverPhase.end_month}</span>
             </div>
             {hoverPhase.description && <p className="text-xs text-ink-dim leading-relaxed mb-2">{hoverPhase.description}</p>}
             {hoverPhase.target_amount != null && hoverPhase.target_amount > 0 && (
               <div className="inline-flex items-center gap-1 text-[11px] text-forest num bg-forest-100 border border-forest-200 px-2 py-0.5 rounded-full">
-                Target: ${hoverPhase.target_amount.toLocaleString()}
+                {labels.targetPrefix}: ${hoverPhase.target_amount.toLocaleString()}
               </div>
             )}
-            <div className="text-[10px] dim mt-2 italic">{t.journey.tooltipJump}</div>
+            <div className="text-[10px] dim mt-2 italic">{labels.jump}</div>
           </div>
         </div>
       )}
@@ -123,7 +128,7 @@ export function Gantt({ phases, milestones, t }: { phases: LocalizedPhase[]; mil
               <h4 className="h-serif text-sm">Milestone M{hoverMs.month}</h4>
               <span className="ml-auto text-[11px] num text-amber-700 font-semibold">{hoverMs.label}</span>
             </div>
-            <p className="text-xs text-ink-dim">Target: <span className="num text-forest font-semibold">${hoverMs.target_amount.toLocaleString()}</span></p>
+            <p className="text-xs text-ink-dim">{labels.targetPrefix}: <span className="num text-forest font-semibold">${hoverMs.target_amount.toLocaleString()}</span></p>
             {hoverMs.notes && <p className="text-xs muted mt-1">{hoverMs.notes}</p>}
           </div>
         </div>

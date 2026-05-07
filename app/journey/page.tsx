@@ -18,7 +18,15 @@ export default async function JourneyPage() {
         <p className="muted mt-4 max-w-2xl">{t.journey.sub}</p>
       </header>
 
-      <Gantt phases={phases} milestones={milestones} t={t} />
+      <Gantt
+        phases={phases}
+        milestones={milestones}
+        labels={{
+          revenue: t.journey.revenueLabel,
+          jump: t.journey.tooltipJump,
+          targetPrefix: t.journey.targetLabel
+        }}
+      />
       <RevenueCurve milestones={milestones} goal={settings.goal_amount} horizonMonths={settings.horizon_months} />
 
       <section className="grid sm:grid-cols-2 gap-4">
@@ -30,7 +38,7 @@ export default async function JourneyPage() {
               </span>
               <h3 className="h-serif text-xl">{p.name}</h3>
             </div>
-            <div className="muted text-xs num mb-3">{t.journey.monthsRange(p.start_month, p.end_month)}</div>
+            <div className="muted text-xs num mb-3">M{p.start_month}-{p.end_month}</div>
             {p.description && <p className="text-sm text-ink-dim mb-3">{p.description}</p>}
             {p.deliverables?.length > 0 && (
               <ul className="space-y-1.5 mb-3">
@@ -44,7 +52,7 @@ export default async function JourneyPage() {
             )}
             {p.target_amount != null && p.target_amount > 0 && (
               <div className="inline-flex items-center gap-1.5 mt-2 text-[12px] text-forest num bg-forest-100 border border-forest-200 px-3 py-1 rounded-full">
-                {t.journey.target(`M${p.end_month}`, formatUSD(p.target_amount))}
+                {t.journey.targetLabel} M{p.end_month}: {formatUSD(p.target_amount)}
               </div>
             )}
           </article>
